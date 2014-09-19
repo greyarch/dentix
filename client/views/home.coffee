@@ -1,0 +1,1 @@
+Template.home.markers = -> EJSON.stringify Dentals.find().fetch()

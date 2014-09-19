@@ -1,0 +1,149 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/core-scaffold/core-scaffold.html">
+<link rel="import" href="/bower_components/core-header-panel/core-header-panel.html">
+<link rel="import" href="/bower_components/core-menu/core-menu.html">
+<link rel="import" href="/bower_components/core-item/core-item.html">
+<link rel="import" href="/bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="/bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="/bower_components/core-field/core-field.html">
+<link rel="import" href="/bower_components/core-icon/core-icon.html">
+<link rel="import" href="/bower_components/core-input/core-input.html">
+<link rel="import" href="/bower_components/core-icons/core-icons.html">
+<link rel="import" href="/bower_components/core-menu/core-submenu.html">
+<link rel="import" href="/bower_components/google-map/google-map.html">
+<link rel="import" href="/bower_components/google-map/google-map-search.html">
+
+<polymer-element name="main-view" attributes="markers">
+
+    <template>
+        <style>
+            :host {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+            }
+            #section {
+                box-sizing: border-box;
+                width: 420px;
+                height: 630px;
+                left: 1400px;
+                top: 460px;
+                background-color: rgb(255, 255, 141);
+            }
+            #core_selector {
+                left: 1290px;
+                top: 620px;
+            }
+            #topeka_category {
+                width: 300px;
+                height: 300px;
+                left: 1390px;
+                top: 460px;
+            }
+            #core_scaffold {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                bottom: 0px;
+                left: 0px;
+                width: 100%;
+                height: 100%;
+            }
+            #core_header_panel {
+                background-color: rgb(255, 255, 255);
+            }
+            #core_toolbar {
+                color: rgb(255, 255, 255);
+                background-color: rgb(79, 125, 201);
+            }
+            #core_menu {
+                font-size: 16px;
+            }
+            #google_map {
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+            }
+            #core_field {
+                background-color: rgb(255, 255, 255);
+            }
+            #paper_fab {
+                left: 1390px;
+                top: 560px;
+            }
+            #div1 {
+                left: 1360px;
+                top: 610px;
+            }
+            #paper_icon_button {
+                left: 1250px;
+                top: 610px;
+            }
+            #paper_checkbox {
+                left: 1280px;
+                top: 500px;
+            }
+            #paper_ripple {
+                width: 300px;
+                height: 300px;
+                left: 1240px;
+                top: 590px;
+            }
+            #paper_toast {
+                left: 1240px;
+                top: 640px;
+            }
+        </style>
+        <core-scaffold id="core_scaffold">
+            <core-header-panel mode="seamed" id="core_header_panel" navigation flex>
+                <core-toolbar id="core_toolbar">
+                    <core-field id="core_field" icon="search" theme="core-light-theme" center horizontal layout>
+                        <core-icon icon="search" id="core_icon"></core-icon>
+                        <core-input willvalidate placeholder="въведете място" inputvalue="{{ $.speech_mic.transcript }}" id="location_input" flex></core-input>
+                        <speech-mic id="speech_mic"></speech-mic>
+                    </core-field>
+                </core-toolbar>
+                <core-menu valueattr="label" id="core_menu" theme="core-light-theme">
+                    <core-item id="sofia" on-tap="{{ showPlace }}" icon="radio-button-on" label="София" horizontal center layout active></core-item>
+                    <core-item id="plovdiv" on-tap="{{ showPlace }}" icon="radio-button-on" label="Пловдив" horizontal center layout></core-item>
+                    <core-item id="varna" on-tap="{{ showPlace }}" icon="radio-button-on" label="Варна" horizontal center layout></core-item>
+                    <core-item id="burgas" on-tap="{{ showPlace }}" icon="radio-button-on" label="Бургас" horizontal center layout></core-item>
+                    <core-item id="stara_zagora" on-tap="{{ showPlace }}" icon="radio-button-on" label="Стара Загора" horizontal center layout></core-item>
+                </core-menu>
+            </core-header-panel>
+            <div id="div" tool>Зъболекари и зъботехници</div>
+                <google-map latitude="{{ $.google_map_search.result.latitude }}" longitude="{{ $.google_map_search.result.longitude }}" zoom="{{zoom}}" id="google_map">
+                    <template repeat="{{markers}}">
+                        <google-map-marker latitude="{{lat}}" longitude="{{long}}"></google-map-marker>
+                    </template>
+                </google-map>
+            <google-map-search map="{{ $.google_map.map }}" query="{{ $.location_input.value }}" id="google_map_search"></google-map-search>
+        </core-scaffold>
+    </template>
+
+    <script>
+        Polymer('main-view', {
+            markers: [],
+            zoom: 14,
+            ready: function () {
+                var locationInput = this.$.location_input;
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        locationInput.value = "София, България";
+                    }, function(msg) {console.log(msg);});
+                } else {
+                    console.log('geolocation not supported');
+                }
+            },
+            showPlace: function(event, detail, sender) {
+                this.$.location_input.value = sender.label + ", България";
+            }
+        });
+    </script>
+
+
+</polymer-element>

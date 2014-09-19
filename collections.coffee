@@ -1,0 +1,1 @@
+@Dentals = new Meteor.Collection 'dentals'
