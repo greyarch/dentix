@@ -1,11 +1,7 @@
-A rough example of using Polymer web components in a Meteor app, by porting the
-Polymer tutorial into a Meteor app.
-
 Running:
 
  * Clone
  * Run `bower install` (Bower)
- * Run `mrt install` (Meteorite)
 
 Some key points:
 
@@ -20,4 +16,4 @@ Some key points:
  * In `index.html` we are explicitly including the Polymer packages via
    `<link rel="import" ... />` tags.
  * Since Meteor won't let us set attributes on the `<body />` tag, we do this
-   in HTML on `Meteor.startup()` in `client/index.js`.
+   in HTML on `Meteor.startup()` in `client/index.coffee`.
