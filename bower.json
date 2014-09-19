@@ -1,8 +1,8 @@
 {
-  "name": "polymer-meteor",
-  "version": "0.0.0",
+  "name": "dentix",
+  "version": "0.0.1",
   "authors": [
-    "Martin Aspeli <optilude@gmail.com>"
+    "Gantcho Kojuharov <gantcho@greyarch.net>"
   ],
   "license": "MIT",
   "ignore": [
