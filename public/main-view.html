@@ -118,7 +118,7 @@
             <div id="div" tool>Зъболекари и зъботехници</div>
                 <google-map latitude="{{ $.google_map_search.result.latitude }}" longitude="{{ $.google_map_search.result.longitude }}" zoom="{{zoom}}" id="google_map">
                     <template repeat="{{markers}}">
-                        <google-map-marker latitude="{{lat}}" longitude="{{long}}"></google-map-marker>
+                        <google-map-marker latitude="{{latitude}}" longitude="{{longitude}}" title="{{company}}"></google-map-marker>
                     </template>
                 </google-map>
             <google-map-search map="{{ $.google_map.map }}" query="{{ $.location_input.value }}" id="google_map_search"></google-map-search>

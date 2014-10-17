@@ -1,3 +1,3 @@
 Meteor.startup -> $('body').attr 'unresolved', ''
 
-@addPlace = (lat, long) -> Dentals.insert lat: lat, long: long
+@addPlace = (lat, lng) -> Dentals.insert latitude: lat, longitude: lng
